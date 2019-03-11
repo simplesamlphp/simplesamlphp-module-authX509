@@ -1,5 +1,5 @@
 {
-    "name": "simplesamlphp/simplesamlphp-module-authX509",
+    "name": "simplesamlphp/simplesamlphp-module-authx509",
     "description": "A module that is able to authenticate users based on X509 client certificates",
     "type": "simplesamlphp-module",
     "keywords": ["simplesamlphp", "X509"],
@@ -41,7 +41,7 @@
         "phpunit/phpunit": "~4.8.36"
     },
     "support": {
-        "issues": "https://github.com/tvdijen/simplesamlphp-module-authX509/issues",
-        "source": "https://github.com/tvdijen/simplesamlphp-module-authX509"
+        "issues": "https://github.com/tvdijen/simplesamlphp-module-authx509/issues",
+        "source": "https://github.com/tvdijen/simplesamlphp-module-authx509"
     }
 }
