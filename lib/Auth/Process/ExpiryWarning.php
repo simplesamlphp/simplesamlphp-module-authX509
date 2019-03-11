@@ -2,7 +2,7 @@
 
 namespace SimpleSAML\Module\authX509\Auth\Process;
 
-use Webmozart/Assert/Assert;
+use Webmozart\Assert\Assert;
 
 /**
  * Filter which shows a warning if the user's client certificate is about to expire.
