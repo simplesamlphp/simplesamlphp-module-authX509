@@ -127,7 +127,7 @@ class X509userCert extends \SimpleSAML\Auth\Source
                 $dn = $ldapcf->searchfordn($ldap_attr, $value, true);
                 /** 
                  * Remove when SSP 1.18 is released
-                 * @var string|null $dn
+                 * @psalm-suppress RedundantConditionGivenDocblockType
                  */
                 if ($dn !== null) {
                     break;
