@@ -14,8 +14,9 @@ if (!array_key_exists('StateId', $_REQUEST)) {
 $id = $_REQUEST['StateId'];
 $state = \SimpleSAML\Auth\State::loadState($id, 'warning:expire');
 
-
-if (array_key_exists('proceed', $_REQUEST)) {
+if (is_null($state)) {
+    throw new \SimpleSAML\Error\NoState();
+} else if (array_key_exists('proceed', $_REQUEST)) {
     // The user has pressed the proceed-button
     \SimpleSAML\Auth\ProcessingChain::resumeProcessing($state);
 }

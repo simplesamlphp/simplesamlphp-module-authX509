@@ -65,7 +65,7 @@ class ExpiryWarning extends \SimpleSAML\Auth\ProcessingFilter
      */
     public function process(&$state)
     {
-        Webmozart::isArray($state);
+        Assert::isArray($state);
 
         if (isset($state['isPassive']) && $state['isPassive'] === true) {
             // We have a passive request. Skip the warning
