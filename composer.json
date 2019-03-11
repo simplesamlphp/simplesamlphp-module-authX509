@@ -1,0 +1,47 @@
+{
+    "name": "simplesamlphp/simplesamlphp-module-authX509",
+    "description": "A module that is able to authenticate users based on X509 client certificates",
+    "type": "simplesamlphp-module",
+    "keywords": ["simplesamlphp", "X509"],
+    "license": "LGPL-3.0-or-later",
+    "authors": [
+        {
+            "name": "Joost van Dijk",
+            "email": "Joost.vanDijk@surfnet.nl"
+        },
+        {
+            "name": "Tim van Dijen",
+            "email": "tvdijen@gmail.com"
+        }
+    ],
+    "config": {
+        "preferred-install": {
+            "simplesamlphp/simplesamlphp": "source",
+            "*": "dist"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "SimpleSAML\\modules\\authX509\\": "lib/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\SimpleSAML\\modules\\authX509\\TestFiles\\": "tests/files",
+            "SimpleSAML\\Test\\Utils\\": "vendor/simplesamlphp/simplesamlphp/tests/Utils"
+        }
+    },
+    "require": {
+        "php": ">=5.5",
+        "simplesamlphp/composer-module-installer": "~1.1",
+        "webmozart/assert": "~1.4"
+    },
+    "require-dev": {
+        "simplesamlphp/simplesamlphp": "^1.17",
+        "phpunit/phpunit": "~4.8.36"
+    },
+    "support": {
+        "issues": "https://github.com/tvdijen/simplesamlphp-module-authX509/issues",
+        "source": "https://github.com/tvdijen/simplesamlphp-module-authX509"
+    }
+}
