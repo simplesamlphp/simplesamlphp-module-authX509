@@ -125,6 +125,7 @@ class X509userCert extends \SimpleSAML\Auth\Source
                 $value = $client_cert_data['subject'][$x509_attr];
                 \SimpleSAML\Logger::info('authX509: cert '.$x509_attr.' = '.$value);
                 $dn = $ldapcf->searchfordn($ldap_attr, $value, true);
+                /** @var string|null $dn  Remove when SSP 1.18 is released */
                 if ($dn !== null) {
                     break;
                 }
