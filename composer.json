@@ -22,12 +22,11 @@
     },
     "autoload": {
         "psr-4": {
-            "SimpleSAML\\modules\\authX509\\": "lib/"
+            "SimpleSAML\\Module\\authX509\\": "lib/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Tests\\SimpleSAML\\modules\\authX509\\TestFiles\\": "tests/files",
             "SimpleSAML\\Test\\Utils\\": "vendor/simplesamlphp/simplesamlphp/tests/Utils"
         }
     },
