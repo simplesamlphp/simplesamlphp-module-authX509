@@ -2,8 +2,6 @@
 
 namespace SimpleSAML\Module\authX509\Auth\Source;
 
-use Webmozart\Assert\Assert;
-
 /**
  * This class implements x509 certificate authentication with certificate validation against an LDAP directory.
  *
@@ -44,8 +42,8 @@ class X509userCert extends \SimpleSAML\Auth\Source
      */
     public function __construct($info, &$config)
     {
-        Assert::isArray($info);
-        Assert::isArray($config);
+        assert(is_array($info));
+        assert(is_array($config));
 
         if (isset($config['authX509:x509attributes'])) {
             $this->x509attributes = $config['authX509:x509attributes'];
@@ -97,7 +95,7 @@ class X509userCert extends \SimpleSAML\Auth\Source
      */
     public function authenticate(&$state)
     {
-        Assert::isArray($state);
+        assert(is_array($state));
         $ldapcf = $this->ldapcf;
 
         if (!isset($_SERVER['SSL_CLIENT_CERT']) ||
@@ -146,7 +144,7 @@ class X509userCert extends \SimpleSAML\Auth\Source
         if ($this->ldapusercert === null) {
             // do not check for certificate match
             $attributes = $ldapcf->getAttributes($dn);
-            Assert::isArray($attributes);
+            assert(is_array($attributes));
             $state['Attributes'] = $attributes;
             $this->authSuccesful($state);
 
@@ -180,7 +178,7 @@ class X509userCert extends \SimpleSAML\Auth\Source
 
             if ($ldap_cert_data === $client_cert_data) {
                 $attributes = $ldapcf->getAttributes($dn);
-                Assert::isArray($attributes);
+                assert(is_array($attributes));
                 $state['Attributes'] = $attributes;
                 $this->authSuccesful($state);
 
