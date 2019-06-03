@@ -2,8 +2,6 @@
 
 namespace SimpleSAML\Module\authX509\Auth\Process;
 
-use Webmozart\Assert\Assert;
-
 /**
  * Filter which shows a warning if the user's client certificate is about to expire.
  *
@@ -37,7 +35,7 @@ class ExpiryWarning extends \SimpleSAML\Auth\ProcessingFilter
     {
         parent::__construct($config, $reserved);
 
-        Assert::isArray($config);
+        assert(is_array($config));
 
         if (array_key_exists('warndaysbefore', $config)) {
             $this->warndaysbefore = $config['warndaysbefore'];
@@ -65,7 +63,7 @@ class ExpiryWarning extends \SimpleSAML\Auth\ProcessingFilter
      */
     public function process(&$state)
     {
-        Assert::isArray($state);
+        assert(is_array($state));
 
         if (isset($state['isPassive']) && $state['isPassive'] === true) {
             // We have a passive request. Skip the warning
