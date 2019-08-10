@@ -44,7 +44,7 @@
         "ssp-mixedcase-module-name": "authX509"
     },
     "support": {
-        "issues": "https://github.com/tvdijen/simplesamlphp-module-authx509/issues",
-        "source": "https://github.com/tvdijen/simplesamlphp-module-authx509"
+        "issues": "https://github.com/simplesamlphp/simplesamlphp-module-authx509/issues",
+        "source": "https://github.com/simplesamlphp/simplesamlphp-module-authx509"
     }
 }
