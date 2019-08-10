@@ -102,8 +102,7 @@ can hack your metadata/saml20-idp-hosted.php file that way:
             'authority'     =>      'login',
             'userid.attribute' =>   'uid',
             'logouttype'    =>      'iframe',
-            'attributes.NameFormat' =>
-                            'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
+            'attributes.NameFormat' => 'urn:oasis:names:tc:SAML:2.0:attrname-format:uri',
     )
 
 Checking certificate expiry
