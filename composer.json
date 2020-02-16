@@ -31,14 +31,13 @@
         }
     },
     "require": {
-        "php": ">=5.5",
+        "php": ">=7.2",
         "simplesamlphp/composer-module-installer": "~1.1",
-        "simplesamlphp/simplesamlphp-module-ldap": "^1.0",
-        "webmozart/assert": "~1.4"
+        "simplesamlphp/simplesamlphp": "dev-master",
+        "simplesamlphp/simplesamlphp-module-ldap": "^1.0"
     },
     "require-dev": {
-        "simplesamlphp/simplesamlphp": "^1.17",
-        "simplesamlphp/simplesamlphp-test-framework": "^0.0.8"
+        "simplesamlphp/simplesamlphp-test-framework": "^0.1.0"
     },
     "extra": {
         "ssp-mixedcase-module-name": "authX509"

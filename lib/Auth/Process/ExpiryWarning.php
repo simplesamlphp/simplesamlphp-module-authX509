@@ -2,6 +2,10 @@
 
 namespace SimpleSAML\Module\authX509\Auth\Process;
 
+use SimpleSAML\Auth;
+use SimpleSAML\Logger;
+use SimpleSAML\Module;
+use SimpleSAML\Utils;
 use Webmozart\Assert\Assert;
 
 /**
@@ -19,7 +23,7 @@ use Webmozart\Assert\Assert;
  * @package SimpleSAMLphp
  */
 
-class ExpiryWarning extends \SimpleSAML\Auth\ProcessingFilter
+class ExpiryWarning extends Auth\ProcessingFilter
 {
     /** @var int */
     private $warndaysbefore = 30;
@@ -33,11 +37,9 @@ class ExpiryWarning extends \SimpleSAML\Auth\ProcessingFilter
      * @param array $config  Configuration information about this filter.
      * @param mixed $reserved  For future use.
      */
-    public function __construct($config, $reserved)
+    public function __construct(array $config, $reserved)
     {
         parent::__construct($config, $reserved);
-
-        Assert::isArray($config);
 
         if (array_key_exists('warndaysbefore', $config)) {
             $this->warndaysbefore = $config['warndaysbefore'];
@@ -63,24 +65,24 @@ class ExpiryWarning extends \SimpleSAML\Auth\ProcessingFilter
      * @param array $state  The state of the response.
      * @return void
      */
-    public function process(&$state)
+    public function process(array &$state): void
     {
-        Assert::isArray($state);
-
         if (isset($state['isPassive']) && $state['isPassive'] === true) {
             // We have a passive request. Skip the warning
             return;
         }
 
-        if (!isset($_SERVER['SSL_CLIENT_CERT']) ||
-            ($_SERVER['SSL_CLIENT_CERT'] == '')) {
+        if (
+            !isset($_SERVER['SSL_CLIENT_CERT']) ||
+            ($_SERVER['SSL_CLIENT_CERT'] == '')
+        ) {
             return;
         }
 
         $client_cert = $_SERVER['SSL_CLIENT_CERT'];
         $client_cert_data = openssl_x509_parse($client_cert);
         if ($client_cert_data == false) {
-            \SimpleSAML\Logger::error('authX509: invalid cert');
+            Logger::error('authX509: invalid cert');
             return;
         }
         $validTo = $client_cert_data['validTo_time_t'];
@@ -91,13 +93,13 @@ class ExpiryWarning extends \SimpleSAML\Auth\ProcessingFilter
             return;
         }
 
-        \SimpleSAML\Logger::warning('authX509: user certificate expires in '.$daysleft.' days');
+        Logger::warning('authX509: user certificate expires in ' . $daysleft . ' days');
         $state['daysleft'] = $daysleft;
         $state['renewurl'] = $this->renewurl;
 
         // Save state and redirect
-        $id = \SimpleSAML\Auth\State::saveState($state, 'warning:expire');
-        $url = \SimpleSAML\Module::getModuleURL('authX509/expirywarning.php');
-        \SimpleSAML\Utils\HTTP::redirectTrustedURL($url, ['StateId' => $id]);
+        $id = Auth\State::saveState($state, 'warning:expire');
+        $url = Module::getModuleURL('authX509/expirywarning.php');
+        Utils\HTTP::redirectTrustedURL($url, ['StateId' => $id]);
     }
 }

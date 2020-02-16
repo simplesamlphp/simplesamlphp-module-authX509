@@ -16,17 +16,17 @@ $state = \SimpleSAML\Auth\State::loadState($id, 'warning:expire');
 
 if (is_null($state)) {
     throw new \SimpleSAML\Error\NoState();
-} else if (array_key_exists('proceed', $_REQUEST)) {
+} elseif (array_key_exists('proceed', $_REQUEST)) {
     // The user has pressed the proceed-button
     \SimpleSAML\Auth\ProcessingChain::resumeProcessing($state);
 }
 
 $globalConfig = \SimpleSAML\Configuration::getInstance();
 
-$t = new \SimpleSAML\XHTML\Template($globalConfig, 'authX509:X509warning.php');
+$t = new \SimpleSAML\XHTML\Template($globalConfig, 'authX509:X509warning.twig');
 $t->data['target'] = \SimpleSAML\Module::getModuleURL('authX509/expirywarning.php');
 $t->data['data'] = ['StateId' => $id];
 $t->data['daysleft'] = $state['daysleft'];
 $t->data['renewurl'] = $state['renewurl'];
 $t->data['errorcodes'] = \SimpleSAML\Error\ErrorCodes::getAllErrorCodeMessages();
-$t->show();
+$t->send();
