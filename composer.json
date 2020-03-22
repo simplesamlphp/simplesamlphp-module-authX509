@@ -3,7 +3,7 @@
     "description": "A module that is able to authenticate users based on X509 client certificates",
     "type": "simplesamlphp-module",
     "keywords": ["simplesamlphp", "X509"],
-    "license": "LGPL-3.0-or-later",
+    "license": "LGPL-2.1-or-later",
     "authors": [
         {
             "name": "Joost van Dijk",
