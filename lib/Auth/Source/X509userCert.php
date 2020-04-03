@@ -26,6 +26,12 @@ class X509userCert extends \SimpleSAML\Auth\Source
      */
     private $x509attributes = ['UID' => 'uid'];
 
+    /**
+     * A pattern from configuration to construct a ldap dn from a username
+     * @var string|null
+     */
+    private $dnpattern;
+
 
     /**
      * LDAP attribute containing the user certificate.
@@ -57,6 +63,10 @@ class X509userCert extends \SimpleSAML\Auth\Source
 
         if (array_key_exists('authX509:ldapusercert', $config)) {
             $this->ldapusercert = $config['authX509:ldapusercert'];
+        }
+
+        if (isset($config['dnpattern'])) {
+            $this->dnpattern = $config['dnpattern'];
         }
 
         parent::__construct($info, $config);
@@ -130,7 +140,11 @@ class X509userCert extends \SimpleSAML\Auth\Source
                 $value = $client_cert_data['subject'][$x509_attr];
                 Logger::info('authX509: cert ' . $x509_attr . ' = ' . $value);
 
-                $dn = $ldapcf->searchfordn($ldap_attr, $value, true);
+                if (isset($this->dnpattern)) {
+                    $dn = str_replace('%username%', $value, $this->dnpattern);
+                } else {
+                    $dn = $ldapcf->searchfordn($ldap_attr, $value, true);
+                }
                 if ($dn !== null) {
                     break;
                 }
