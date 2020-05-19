@@ -33,7 +33,7 @@
     "require": {
         "php": ">=5.5",
         "simplesamlphp/composer-module-installer": "~1.1",
-        "simplesamlphp/simplesamlphp-module-ldap": "^0.9"
+        "simplesamlphp/simplesamlphp-module-ldap": "^0.9.5"
     },
     "require-dev": {
         "simplesamlphp/simplesamlphp": "^1.17",
