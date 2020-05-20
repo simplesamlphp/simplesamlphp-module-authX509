@@ -70,7 +70,7 @@ class ExpiryWarning
      * Show expiry warning.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \SimpleSAML\XHTML\Template
+     * @return \SimpleSAML\XHTML\Template|\SimpleSAML\HTTP\RunnableResponse
      * @throws \Exception
      */
     public function main(Request $request)
