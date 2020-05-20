@@ -36,7 +36,7 @@
         "simplesamlphp/simplesamlphp-module-ldap": "^0.9.5"
     },
     "require-dev": {
-        "simplesamlphp/simplesamlphp": "^1.17",
+        "simplesamlphp/simplesamlphp": "^1.18",
         "simplesamlphp/simplesamlphp-test-framework": "^0.0.15"
     },
     "extra": {
