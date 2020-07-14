@@ -152,7 +152,7 @@ class X509userCert extends \SimpleSAML\Auth\Source
         }
 
         $ldap_certs = $ldapcf->getAttributes($dn, $this->ldapusercert);
-
+        
         if (empty($ldap_certs)) {
             \SimpleSAML\Logger::error('authX509: no certificate found in LDAP for dn='.$dn);
             $state['authX509.error'] = "UNKNOWNCERT";
@@ -169,7 +169,8 @@ class X509userCert extends \SimpleSAML\Auth\Source
         $ldap_certs = $merged_ldapcerts;
 
         foreach ($ldap_certs as $ldap_cert) {
-            $ldap_cert_data = openssl_x509_parse($ldap_cert);
+            $pem = \SimpleSAML\Utils\Crypto::der2pem($ldap_cert);
+            $ldap_cert_data = openssl_x509_parse($pem);
             if ($ldap_cert_data === false) {
                 \SimpleSAML\Logger::error('authX509: cert in LDAP is invalid for dn='.$dn);
                 continue;
