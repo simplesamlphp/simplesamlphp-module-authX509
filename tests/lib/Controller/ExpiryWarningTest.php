@@ -24,6 +24,9 @@ class PreProdWarningTest extends TestCase
     /** @var \SimpleSAML\Configuration */
     protected $config;
 
+    /** @var \SimpleSAML\Logger */
+    protected $logger;
+
     /** @var \SimpleSAML\Session */
     protected $session;
 
@@ -43,6 +46,13 @@ class PreProdWarningTest extends TestCase
             'simplesaml'
         );
 
+        $this->logger = new class () extends Logger {
+            public static function info(string $str): void
+            {
+                // do nothing
+            }
+        };
+
         $this->session = Session::getSessionFromRequest();
     }
 
@@ -59,6 +69,7 @@ class PreProdWarningTest extends TestCase
         );
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
+        $c->setLogger($logger);
 
         $this->expectException(Error\BadRequest::class);
         $this->expectExceptionMessage('Missing required StateId query parameter.');
@@ -80,8 +91,9 @@ class PreProdWarningTest extends TestCase
         );
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
+        $c->setLogger($logger);
         $c->setAuthState(new class () extends Auth\State {
-            public static function loadState($id, $stage, $allowMissing = false)
+            public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
             {
                 return null;
             }
@@ -107,8 +119,9 @@ class PreProdWarningTest extends TestCase
         );
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
+        $c->setLogger($logger);
         $c->setAuthState(new class () extends Auth\State {
-            public static function loadState($id, $stage, $allowMissing = false)
+            public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
             {
                 return [];
             }
@@ -135,8 +148,9 @@ class PreProdWarningTest extends TestCase
         );
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
+        $c->setLogger($logger);
         $c->setAuthState(new class () extends Auth\State {
-            public static function loadState($id, $stage, $allowMissing = false)
+            public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
             {
                 return ['daysleft' => 10, 'renewurl' => 'https://example.org/renew'];
             }
