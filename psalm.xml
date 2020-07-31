@@ -7,7 +7,6 @@
     <projectFiles>
         <directory name="lib" />
         <directory name="tests" />
-        <directory name="www" />
     </projectFiles>
 
     <issueHandlers>
