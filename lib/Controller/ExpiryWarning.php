@@ -82,7 +82,8 @@ class ExpiryWarning
             throw new Error\BadRequest('Missing required StateId query parameter.');
         }
 
-        $state = $this->authState::loadState($id, 'warning:expire');
+        $authState = $this->authState;
+        $state = $authState::loadState($id, 'warning:expire');
 
         if (is_null($state)) {
             throw new Error\NoState();
