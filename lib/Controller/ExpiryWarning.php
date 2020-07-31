@@ -12,6 +12,7 @@ use SimpleSAML\Module\authX509\Auth\Source\X509userCert;
 use SimpleSAML\Session;
 use SimpleSAML\XHTML\Template;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 /**
  * Controller class for the authx509 module.
@@ -85,10 +86,10 @@ class ExpiryWarning
      * Show expiry warning.
      *
      * @param \Symfony\Component\HttpFoundation\Request $request
-     * @return \SimpleSAML\XHTML\Template
+     * @return \Symfony\Component\HttpFoundation\Response
      * @throws \Exception
      */
-    public function main(Request $request): Template
+    public function main(Request $request): Response
     {
         $this->logger::info('AuthX509 - Showing expiry warning to user');
 
