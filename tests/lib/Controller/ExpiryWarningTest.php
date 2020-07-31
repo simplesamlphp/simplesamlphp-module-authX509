@@ -69,7 +69,7 @@ class PreProdWarningTest extends TestCase
         );
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
-        $c->setLogger($logger);
+        $c->setLogger($this->logger);
 
         $this->expectException(Error\BadRequest::class);
         $this->expectExceptionMessage('Missing required StateId query parameter.');
@@ -91,7 +91,7 @@ class PreProdWarningTest extends TestCase
         );
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
-        $c->setLogger($logger);
+        $c->setLogger($this->logger);
         $c->setAuthState(new class () extends Auth\State {
             public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
             {
@@ -119,7 +119,7 @@ class PreProdWarningTest extends TestCase
         );
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
-        $c->setLogger($logger);
+        $c->setLogger($this->logger);
         $c->setAuthState(new class () extends Auth\State {
             public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
             {
@@ -148,7 +148,7 @@ class PreProdWarningTest extends TestCase
         );
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
-        $c->setLogger($logger);
+        $c->setLogger($this->logger);
         $c->setAuthState(new class () extends Auth\State {
             public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
             {
