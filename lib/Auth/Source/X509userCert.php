@@ -14,7 +14,6 @@ use SimpleSAML\XHTML\Template;
 /**
  * This class implements x509 certificate authentication with certificate validation against an LDAP directory.
  *
- * @author Emmanuel Dreyfus <manu@netbsd.org>
  * @package SimpleSAMLphp
  */
 

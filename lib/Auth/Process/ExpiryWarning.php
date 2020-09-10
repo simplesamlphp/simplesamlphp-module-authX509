@@ -19,7 +19,6 @@ use Webmozart\Assert\Assert;
  * ),
  * </code>
  *
- * @author Joost van Dijk, SURFnet. <Joost.vanDijk@surfnet.nl>
  * @package SimpleSAMLphp
  */
 
