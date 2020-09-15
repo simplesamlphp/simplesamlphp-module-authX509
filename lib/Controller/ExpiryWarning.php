@@ -64,7 +64,6 @@ class ExpiryWarning
      * Inject the \SimpleSAML\Logger dependency.
      *
      * @param \SimpleSAML\Logger $logger
-     * @return void
      */
     public function setLogger(Logger $logger): void
     {
@@ -76,7 +75,6 @@ class ExpiryWarning
      * Inject the \SimpleSAML\Auth\State dependency.
      *
      * @param \SimpleSAML\Auth\State $authState
-     * @return void
      */
     public function setAuthState(Auth\State $authState): void
     {

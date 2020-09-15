@@ -62,7 +62,6 @@ class ExpiryWarning extends Auth\ProcessingFilter
      * is informed about the expiry date of his/her certificate.
      *
      * @param array $state  The state of the response.
-     * @return void
      */
     public function process(array &$state): void
     {

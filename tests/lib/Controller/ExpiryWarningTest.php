@@ -32,7 +32,6 @@ class PreProdWarningTest extends TestCase
 
     /**
      * Set up for each test.
-     * @return void
      */
     protected function setUp(): void
     {
@@ -59,7 +58,6 @@ class PreProdWarningTest extends TestCase
 
     /**
      * Test that request without StateId results in a BadRequest-error
-     * @return void
      */
     public function testNoStateId(): void
     {
@@ -80,7 +78,6 @@ class PreProdWarningTest extends TestCase
 
     /**
      * Test that request without State results in a NOSTATE-error
-     * @return void
      */
     public function testNoState(): void
     {
@@ -108,7 +105,6 @@ class PreProdWarningTest extends TestCase
 
     /**
      * Test that request with 'proceed' param results in a RunnableResponse
-     * @return void
      */
     public function testProceed(): void
     {
@@ -137,7 +133,6 @@ class PreProdWarningTest extends TestCase
 
     /**
      * Test that request without 'proceed' param results in a Template
-     * @return void
      */
     public function testNotProceed(): void
     {

@@ -83,7 +83,6 @@ class X509userCert extends \SimpleSAML\Auth\Source
      * This function can be overloaded by a child authentication class that wish to perform some operations on failure.
      *
      * @param array &$state Information about the current authentication.
-     * @return void
      */
     public function authFailed(&$state): void
     {
@@ -106,7 +105,6 @@ class X509userCert extends \SimpleSAML\Auth\Source
      * page. On failure, The authX509:X509error.php template is loaded.
      *
      * @param array &$state Information about the current authentication.
-     * @return void
      */
     public function authenticate(array &$state): void
     {
@@ -216,7 +214,6 @@ class X509userCert extends \SimpleSAML\Auth\Source
      * This function can be overloaded by a child authentication class that wish to perform some operations after login.
      *
      * @param array &$state Information about the current authentication.
-     * @return void
      */
     public function authSuccesful(array &$state): void
     {
