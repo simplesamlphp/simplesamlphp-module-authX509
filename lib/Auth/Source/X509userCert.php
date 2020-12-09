@@ -92,6 +92,12 @@ class X509userCert extends \SimpleSAML\Auth\Source
         $t->data['loginurl'] = Utils\HTTP::getSelfURL();
         $t->data['errorcode'] = $state['authX509.error'];
         $t->data['errorcodes'] = Error\ErrorCodes::getAllErrorCodeMessages();
+        $t->data['errortitle'] = $t->data['errorcode'];
+        if (array_key_exists($t->data['errorcode'], $t->data['errorcodes'])) {
+            $t->data['errordescr'] = $t->data['errorcodes'][$t->data['errorcode']];
+        } else {
+            $t->data['errordescr'] = $t->data['errorcode'];
+        }
 
         $t->send();
         exit();
@@ -167,7 +173,7 @@ class X509userCert extends \SimpleSAML\Auth\Source
         }
 
         $ldap_certs = $ldapcf->getAttributes($dn, $this->ldapusercert);
-        
+
         if (empty($ldap_certs)) {
             Logger::error('authX509: no certificate found in LDAP for dn=' . $dn);
             $state['authX509.error'] = "UNKNOWNCERT";
