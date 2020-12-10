@@ -87,11 +87,17 @@ class X509userCert extends \SimpleSAML\Auth\Source
     public function authFailed(&$state): void
     {
         $config = Configuration::getInstance();
+        $errorcode = $state['authX509.error'];
+        $errorcodes = Error\ErrorCodes::getAllErrorCodeMessages();
 
         $t = new Template($config, 'authX509:X509error.twig');
         $t->data['loginurl'] = Utils\HTTP::getSelfURL();
-        $t->data['errorcode'] = $state['authX509.error'];
-        $t->data['errorcodes'] = Error\ErrorCodes::getAllErrorCodeMessages();
+        $t->data['errortitle'] = $errorcode;
+        if (array_key_exists($errorcode, $errorcodes)) {
+            $t->data['errordescr'] = $errorcodes[$errorcode];
+        } else {
+            $t->data['errordescr'] = $errorcode;
+        }
 
         $t->send();
         exit();
@@ -167,7 +173,7 @@ class X509userCert extends \SimpleSAML\Auth\Source
         }
 
         $ldap_certs = $ldapcf->getAttributes($dn, $this->ldapusercert);
-        
+
         if (empty($ldap_certs)) {
             Logger::error('authX509: no certificate found in LDAP for dn=' . $dn);
             $state['authX509.error'] = "UNKNOWNCERT";

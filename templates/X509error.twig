@@ -2,9 +2,11 @@
 {% extends "base.twig" %}
 {% block content %}
 
-{% if errorcode -%}
 <h2>{% trans 'Error' %}</h2>
+{% if errortitle is defined -%}
 <h3>{% trans errortitle %}</h3>
+{% endif -%}
+{% if errordescr is defined -%}
 <p>{% trans errordescr %}</p>
 {% endif -%}
 
