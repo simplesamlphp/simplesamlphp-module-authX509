@@ -87,16 +87,16 @@ class X509userCert extends \SimpleSAML\Auth\Source
     public function authFailed(&$state): void
     {
         $config = Configuration::getInstance();
+        $errorcode = $state['authX509.error'];
+        $errorcodes = Error\ErrorCodes::getAllErrorCodeMessages();
 
         $t = new Template($config, 'authX509:X509error.twig');
         $t->data['loginurl'] = Utils\HTTP::getSelfURL();
-        $t->data['errorcode'] = $state['authX509.error'];
-        $t->data['errorcodes'] = Error\ErrorCodes::getAllErrorCodeMessages();
-        $t->data['errortitle'] = $t->data['errorcode'];
-        if (array_key_exists($t->data['errorcode'], $t->data['errorcodes'])) {
-            $t->data['errordescr'] = $t->data['errorcodes'][$t->data['errorcode']];
+        $t->data['errortitle'] = $errorcode;
+        if (array_key_exists($errorcode, $errorcodes)) {
+            $t->data['errordescr'] = $errorcodes[$errorcode];
         } else {
-            $t->data['errordescr'] = $t->data['errorcode'];
+            $t->data['errordescr'] = $errorcode;
         }
 
         $t->send();
