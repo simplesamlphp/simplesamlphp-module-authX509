@@ -92,11 +92,14 @@ class X509userCert extends \SimpleSAML\Auth\Source
 
         $t = new Template($config, 'authX509:X509error.twig');
         $t->data['loginurl'] = Utils\HTTP::getSelfURL();
-        $t->data['errortitle'] = $errorcode;
-        if (array_key_exists($errorcode, $errorcodes)) {
-            $t->data['errordescr'] = $errorcodes[$errorcode];
-        } else {
-            $t->data['errordescr'] = $errorcode;
+
+        if (!empty($errorcode)) {
+            if (array_key_exists($errorcode, $errorcodes['title'])) {
+                $t->data['errortitle'] = $errorcodes['title'][$errorcode];
+            }
+            if (array_key_exists($errorcode, $errorcodes['descr'])) {
+                $t->data['errordescr'] = $errorcodes['descr'][$errorcode];
+            }
         }
 
         $t->send();
