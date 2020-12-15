@@ -73,11 +73,22 @@ class X509userCert extends \SimpleSAML\Auth\Source
     public function authFailed(&$state)
     {
         $config = \SimpleSAML\Configuration::getInstance();
+        $errorcode = $state['authX509.error'];
+        $errorcodes = Error\ErrorCodes::getAllErrorCodeMessages();
 
         $t = new \SimpleSAML\XHTML\Template($config, 'authX509:X509error.php');
         $t->data['loginurl'] = \SimpleSAML\Utils\HTTP::getSelfURL();
-        $t->data['errorcode'] = $state['authX509.error'];
-        $t->data['errorcodes'] = \SimpleSAML\Error\ErrorCodes::getAllErrorCodeMessages();
+        $t->data['errorcode'] = $errorcode;
+        $t->data['errorcodes'] = $errorcodes;
+
+        if (!empty($errorcode)) {
+            if (array_key_exists($errorcode, $errorcodes['title'])) {
+                $t->data['errortitle'] = $errorcodes['title'][$errorcode];
+            }
+            if (array_key_exists($errorcode, $errorcodes['descr'])) {
+                $t->data['errordescr'] = $errorcodes['descr'][$errorcode];
+            }
+        }
 
         $t->show();
         exit();
