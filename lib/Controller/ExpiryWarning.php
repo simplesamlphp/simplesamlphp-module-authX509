@@ -26,13 +26,13 @@ use Symfony\Component\HttpFoundation\Response;
 class ExpiryWarning
 {
     /** @var \SimpleSAML\Configuration */
-    protected $config;
+    protected Configuration $config;
 
     /** @var \SimpleSAML\Logger */
-    protected $logger;
+    protected Logger $logger;
 
     /** @var \SimpleSAML\Session */
-    protected $session;
+    protected Session $session;
 
     /**
      * @var \SimpleSAML\Auth\State|string

@@ -25,10 +25,10 @@ use Webmozart\Assert\Assert;
 class ExpiryWarning extends Auth\ProcessingFilter
 {
     /** @var int */
-    private $warndaysbefore = 30;
+    private int $warndaysbefore = 30;
 
     /** @var string|null */
-    private $renewurl = null;
+    private ?string $renewurl = null;
 
     /**
      * Initialize this filter.

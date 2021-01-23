@@ -21,15 +21,15 @@ class X509userCert extends \SimpleSAML\Auth\Source
 {
     /**
      * x509 attributes to use from the certificate for searching the user in the LDAP directory.
-     * @var array
+     * @var array<string, string>
      */
-    private $x509attributes = ['UID' => 'uid'];
+    private array $x509attributes = ['UID' => 'uid'];
 
     /**
      * A pattern from configuration to construct a ldap dn from a username
      * @var string|null
      */
-    private $dnpattern;
+    private ?string $dnpattern;
 
 
     /**
@@ -37,13 +37,13 @@ class X509userCert extends \SimpleSAML\Auth\Source
      * This can be set to NULL to avoid looking up the certificate in LDAP
      * @var array|null
      */
-    private $ldapusercert = ['userCertificate;binary'];
+    private ?array $ldapusercert = ['userCertificate;binary'];
 
 
     /**
      * @var \SimpleSAML\Module\ldap\ConfigHelper
      */
-    private $ldapcf;
+    private ConfigHelper $ldapcf;
 
 
     /**
