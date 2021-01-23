@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace SimpleSAML\Module\authX509\Auth\Process;
 
+use SimpleSAML\Assert\Assert;
 use SimpleSAML\Auth;
 use SimpleSAML\Logger;
 use SimpleSAML\Module;
 use SimpleSAML\Utils;
-use Webmozart\Assert\Assert;
 
 /**
  * Filter which shows a warning if the user's client certificate is about to expire.
@@ -17,7 +17,7 @@ use Webmozart\Assert\Assert;
  * // show about2xpire warning if client certificate is about to expire
  * 10 => array(
  *     'class' => 'authX509:ExpiryWarning',
- *     'warndaysbefore' => '30',
+ *     'warndaysbefore' => 30,
  * ),
  * </code>
  *
@@ -44,16 +44,18 @@ class ExpiryWarning extends Auth\ProcessingFilter
 
         if (array_key_exists('warndaysbefore', $config)) {
             $this->warndaysbefore = $config['warndaysbefore'];
-            if (!is_string($this->warndaysbefore)) {
-                throw new \Exception('Invalid value for \'warndaysbefore\'-option to authX509::ExpiryWarning filter.');
-            }
+            Assert::integer(
+                $this->warndaysbefore,
+                'Invalid value for \'warndaysbefore\'-option to authX509::ExpiryWarning filter.'
+            );
         }
 
         if (array_key_exists('renewurl', $config)) {
             $this->renewurl = $config['renewurl'];
-            if (!is_string($this->renewurl)) {
-                throw new \Exception('Invalid value for \'renewurl\'-option to authX509::ExpiryWarning filter.');
-            }
+            Assert::string(
+                $this->renewurl,
+                'Invalid value for \'renewurl\'-option to authX509::ExpiryWarning filter.'
+            );
         }
     }
 

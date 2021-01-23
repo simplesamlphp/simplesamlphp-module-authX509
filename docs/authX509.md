@@ -114,7 +114,7 @@ Example:
 
      10 => array(
          'class' => 'authX509:ExpiryWarning',
-         'warndaysbefore' => '30',
+         'warndaysbefore' => 30,
          'renewurl' => 'https://myca.com/renew',
      ),
 
