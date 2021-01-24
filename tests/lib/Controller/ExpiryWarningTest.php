@@ -17,11 +17,11 @@ use SimpleSAML\XHTML\Template;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * Set of tests for the controllers in the "preprodwarning" module.
+ * Set of tests for the controllers in the "authX509" module.
  *
  * @package SimpleSAML\Test
  */
-class PreProdWarningTest extends TestCase
+class AuthX509Test extends TestCase
 {
     /** @var \SimpleSAML\Configuration */
     protected Configuration $config;
