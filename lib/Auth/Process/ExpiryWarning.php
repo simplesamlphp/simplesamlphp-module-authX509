@@ -102,6 +102,7 @@ class ExpiryWarning extends Auth\ProcessingFilter
         // Save state and redirect
         $id = Auth\State::saveState($state, 'warning:expire');
         $url = Module::getModuleURL('authX509/expirywarning.php');
-        Utils\HTTP::redirectTrustedURL($url, ['StateId' => $id]);
+        $httpUtils = new Utils\HTTP();
+        $httpUtils->redirectTrustedURL($url, ['StateId' => $id]);
     }
 }

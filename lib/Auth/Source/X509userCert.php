@@ -93,7 +93,8 @@ class X509userCert extends \SimpleSAML\Auth\Source
         $errorcodes = Error\ErrorCodes::getAllErrorCodeMessages();
 
         $t = new Template($config, 'authX509:X509error.twig');
-        $t->data['loginurl'] = Utils\HTTP::getSelfURL();
+        $httpUtils = new Utils\HTTP();
+        $t->data['loginurl'] = $httpUtils->getSelfURL();
 
         if (!empty($errorcode)) {
             if (array_key_exists($errorcode, $errorcodes['title'])) {
@@ -194,8 +195,9 @@ class X509userCert extends \SimpleSAML\Auth\Source
         }
         $ldap_certs = $merged_ldapcerts;
 
+        $cryptoUtils = new Utils\Crypto();
         foreach ($ldap_certs as $ldap_cert) {
-            $pem = Utils\Crypto::der2pem($ldap_cert);
+            $pem = $cryptoUtils->der2pem($ldap_cert);
             $ldap_cert_data = openssl_x509_parse($pem);
             if ($ldap_cert_data === false) {
                 Logger::error('authX509: cert in LDAP is invalid for dn=' . $dn);
