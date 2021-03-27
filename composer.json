@@ -37,7 +37,7 @@
         "simplesamlphp/simplesamlphp-module-ldap": "^1.2"
     },
     "require-dev": {
-        "simplesamlphp/simplesamlphp-test-framework": "^1.0.3"
+        "simplesamlphp/simplesamlphp-test-framework": "^1.1.0"
     },
     "extra": {
         "ssp-mixedcase-module-name": "authX509"
