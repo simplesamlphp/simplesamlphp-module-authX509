@@ -15,27 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-msgid "{authX509:X509warning:proceed}"
-msgstr "Proceed"
-
-msgid "{authX509:X509warning:renew}"
-msgstr "Please renew your certificate in time."
-
-msgid "{authX509:X509error:certificate_text}"
-msgstr "X509 certificate authentication is required to access this service."
-
-msgid "{authX509:X509warning:renew_url}"
-msgstr "Please  <a href='%renewurl%'>renew</a> your certificate in time."
-
-msgid "{authX509:X509warning:warning_header}"
-msgstr "Your certificate is about to expire."
-
-msgid "{authX509:X509error:certificate_header}"
-msgstr "X509 certificate authentication"
-
-msgid "{authX509:X509warning:warning}"
-msgstr "Your certificate will expire in %daysleft% days."
-
 msgid "Please renew your certificate in time."
 msgstr "Please renew your certificate in time."
 

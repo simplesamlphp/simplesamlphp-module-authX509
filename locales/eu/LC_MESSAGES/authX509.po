@@ -15,14 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-msgid "{authX509:X509error:certificate_text}"
-msgstr ""
-"X509 ziurtagiriaren bidezko kautotzea beharrezkoa da zerbitzu honetan "
-"sartzeko"
-
-msgid "{authX509:X509error:certificate_header}"
-msgstr "Kautotzea X509 ziurtagiri bidez"
-
 msgid "X509 certificate authentication"
 msgstr "Kautotzea X509 ziurtagiri bidez"
 

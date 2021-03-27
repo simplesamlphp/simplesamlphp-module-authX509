@@ -15,29 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-msgid "{authX509:X509warning:proceed}"
-msgstr "Verder"
-
-msgid "{authX509:X509warning:renew}"
-msgstr "Vervang tijdig je certificaat."
-
-msgid "{authX509:X509error:certificate_text}"
-msgstr ""
-"Authenticatie via een X509-certificaat is noodzakelijk voor toegang tot "
-"deze dienst."
-
-msgid "{authX509:X509warning:renew_url}"
-msgstr "<a href='%renewurl%'>Vervang</a> tijdig je certificaat."
-
-msgid "{authX509:X509warning:warning_header}"
-msgstr "Je certificaat verloopt binnenkort."
-
-msgid "{authX509:X509error:certificate_header}"
-msgstr "Authenticatie via X509-certificaat"
-
-msgid "{authX509:X509warning:warning}"
-msgstr "Je certificaat verloopt over %daysleft% dagen."
-
 msgid "Please renew your certificate in time."
 msgstr "Vervang tijdig je certificaat."
 

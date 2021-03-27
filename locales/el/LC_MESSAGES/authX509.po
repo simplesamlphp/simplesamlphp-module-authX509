@@ -15,29 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-msgid "{authX509:X509warning:proceed}"
-msgstr "Συνέχεια"
-
-msgid "{authX509:X509warning:renew}"
-msgstr "Παρακαλείστε να προχωρήσετε σε ανανέωση του πιστοποιητικού σας έγκαιρα."
-
-msgid "{authX509:X509error:certificate_text}"
-msgstr "Η πρόσβαση στην υπηρεσία απαιτεί ταυτοποίηση μέσω πιστοποιητικού X.509"
-
-msgid "{authX509:X509warning:renew_url}"
-msgstr ""
-"Παρακαλείστε να προχωρήσετε σε <a href=‘%renewurl%’>ανανέωση</a> του "
-"πιστοποιητικού σας έγκαιρα."
-
-msgid "{authX509:X509warning:warning_header}"
-msgstr "Η ισχύς του πιστοποιητικού σας πρόκειται να λήξει."
-
-msgid "{authX509:X509error:certificate_header}"
-msgstr "Ταυτοποίηση μέσω πιστοποιητικού X.509"
-
-msgid "{authX509:X509warning:warning}"
-msgstr "Η ισχύς του πιστοποιητικού σας θα λήξει σε %daysleft%."
-
 msgid "Please renew your certificate in time."
 msgstr "Παρακαλείστε να προχωρήσετε σε ανανέωση του πιστοποιητικού σας έγκαιρα."
 

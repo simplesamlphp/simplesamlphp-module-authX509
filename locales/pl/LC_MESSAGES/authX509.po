@@ -15,27 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-msgid "{authX509:X509warning:proceed}"
-msgstr "Idź"
-
-msgid "{authX509:X509warning:renew}"
-msgstr "Pamiętaj o odnowieniu swojego certyfikatu zanim wygaśnie."
-
-msgid "{authX509:X509error:certificate_text}"
-msgstr "Uwierzytelnienie certyfikatem X509 jest wymagane do uzyskania dostępu do serwisu."
-
-msgid "{authX509:X509warning:renew_url}"
-msgstr "Pamiętaj o <a href='%renewurl%'>odnowieniu</a> swojego certyfikatu zanim wygaśnie."
-
-msgid "{authX509:X509warning:warning_header}"
-msgstr "Twój certyfikat niedługo wygaśnie."
-
-msgid "{authX509:X509error:certificate_header}"
-msgstr "Uwierzytelnienie certyfikatem X509"
-
-msgid "{authX509:X509warning:warning}"
-msgstr "Twój certyfikat wygaśnie za %daysleft% dni."
-
 msgid "Please renew your certificate in time."
 msgstr "Pamiętaj o odnowieniu swojego certyfikatu zanim wygaśnie."
 

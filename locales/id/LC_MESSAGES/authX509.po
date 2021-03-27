@@ -15,12 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-msgid "{authX509:X509error:certificate_text}"
-msgstr "Autentifikasi certificate X509 diperlukan untuk mengakses layanan ini."
-
-msgid "{authX509:X509error:certificate_header}"
-msgstr "Autentifikasi certificate X509"
-
 msgid "X509 certificate authentication"
 msgstr "Autentifikasi certificate X509"
 

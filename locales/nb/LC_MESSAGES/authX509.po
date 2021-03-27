@@ -15,29 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-msgid "{authX509:X509warning:proceed}"
-msgstr "Fortsett"
-
-msgid "{authX509:X509warning:renew}"
-msgstr "Vennligst forny sertifikatet ditt før det utløper."
-
-msgid "{authX509:X509error:certificate_text}"
-msgstr "X509 sertifikatautentisering er påkrevd for å aksessere denne tjenesten."
-
-msgid "{authX509:X509warning:renew_url}"
-msgstr ""
-"Vennligst <a href=‘%renewurl%’>forny</a> sertifikatet ditt før det "
-"utløper."
-
-msgid "{authX509:X509warning:warning_header}"
-msgstr "Sertifikatet ditt vil snart utløpe."
-
-msgid "{authX509:X509error:certificate_header}"
-msgstr "X509 sertifikatautentisering"
-
-msgid "{authX509:X509warning:warning}"
-msgstr "Sertifikatet ditt vil utløpe om %daysleft% dager."
-
 msgid "Please renew your certificate in time."
 msgstr "Vennligst forny sertifikatet ditt før det utløper."
 

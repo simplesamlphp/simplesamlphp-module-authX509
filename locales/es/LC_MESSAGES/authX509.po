@@ -15,29 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-msgid "{authX509:X509warning:proceed}"
-msgstr "Continuar"
-
-msgid "{authX509:X509warning:renew}"
-msgstr "Por favor, renueve su certificado a tiempo."
-
-msgid "{authX509:X509error:certificate_text}"
-msgstr ""
-"Se requiere autenticación mediante certificado X509 para acceder a este "
-"servicio"
-
-msgid "{authX509:X509warning:renew_url}"
-msgstr "Por favor, <a href=‘%renewurl%’>renueve</a> su certificado a tiempo."
-
-msgid "{authX509:X509warning:warning_header}"
-msgstr "Su certificado está a punto de caducar."
-
-msgid "{authX509:X509error:certificate_header}"
-msgstr "Autenticación mediante certificado X509"
-
-msgid "{authX509:X509warning:warning}"
-msgstr "Su certificado caduca en %daysleft% días."
-
 msgid "Please renew your certificate in time."
 msgstr "Por favor, renueve su certificado a tiempo."
 

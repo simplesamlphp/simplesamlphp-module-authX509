@@ -15,14 +15,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-msgid "{authX509:X509error:certificate_text}"
-msgstr ""
-"Az alábbi oldalhoz X509 tanúsítványalapú azonosítás után kaphat "
-"hozzáférést"
-
-msgid "{authX509:X509error:certificate_header}"
-msgstr "X509 tanúsítványalapú azonosítás"
-
 msgid "X509 certificate authentication"
 msgstr "X509 tanúsítványalapú azonosítás"
 
