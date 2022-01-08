@@ -93,7 +93,7 @@ class ExpiryWarning
     {
         $this->logger::info('AuthX509 - Showing expiry warning to user');
 
-        $id = $request->get('StateId', null);
+        $id = $request->query->get('StateId', null);
         if ($id === null) {
             throw new Error\BadRequest('Missing required StateId query parameter.');
         }
@@ -102,7 +102,7 @@ class ExpiryWarning
 
         if (is_null($state)) {
             throw new Error\NoState();
-        } elseif ($request->get('proceed', null) !== null) {
+        } elseif ($request->query->get('proceed', null) !== null) {
             // The user has pressed the proceed-button
             return new RunnableResponse([Auth\ProcessingChain::class, 'resumeProcessing'], [$state]);
         }
