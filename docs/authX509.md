@@ -37,9 +37,15 @@ with different IP address/port combinations.
 Setting up the authX509 module
 ------------------------------
 
-The first thing you need to do is to enable the module:
+The first thing you need to do is to enable the module: in
+`config.php`, search for the `module.enable` key and set `authX509` to true:
 
-    touch modules/authX509/enable
+```
+    'module.enable' => [
+         'authX509' => true,
+         …
+    ],
+```
 
 Then you must add it as an authentication source. Here is an
 example authsources.php entry:
