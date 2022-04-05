@@ -21,7 +21,7 @@ jobs:
         uses: shivammathur/setup-php@v2 #https://github.com/shivammathur/setup-php
         with:
           coverage: debug
-          extensions: intl, mbstring, xml
+          extensions: intl, ldap, mbstring, xml
           ini-values: error_reporting=E_ALL
           php-version: ${{ matrix.php-versions }}
           tools: composer:v2
