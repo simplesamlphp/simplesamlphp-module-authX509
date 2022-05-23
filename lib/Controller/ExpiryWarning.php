@@ -28,9 +28,6 @@ class ExpiryWarning
     /** @var \SimpleSAML\Configuration */
     protected Configuration $config;
 
-    /** @var \SimpleSAML\Logger */
-    protected Logger $logger;
-
     /** @var \SimpleSAML\Session */
     protected Session $session;
 
@@ -61,17 +58,6 @@ class ExpiryWarning
 
 
     /**
-     * Inject the \SimpleSAML\Logger dependency.
-     *
-     * @param \SimpleSAML\Logger $logger
-     */
-    public function setLogger(Logger $logger): void
-    {
-        $this->logger = $logger;
-    }
-
-
-    /**
      * Inject the \SimpleSAML\Auth\State dependency.
      *
      * @param \SimpleSAML\Auth\State $authState
@@ -91,7 +77,7 @@ class ExpiryWarning
      */
     public function main(Request $request): Response
     {
-        $this->logger::info('AuthX509 - Showing expiry warning to user');
+        Logger::info('AuthX509 - Showing expiry warning to user');
 
         $id = $request->query->get('StateId', null);
         if ($id === null) {
