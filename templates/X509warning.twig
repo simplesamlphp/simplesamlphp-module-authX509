@@ -2,8 +2,8 @@
 
 {% block content %}
 
-<h2>{% trans 'Your certificate is about to expire.' %}</h2>
-<form action="{{ target | escape }}">
+<h2>{% trans %}Your certificate is about to expire.{% endtrans %}</h2>
+<form action="{{ target }}">
 
     {% for name, value in data -%}
     <input type="hidden" name="{{ name }}" value="{{ value }}">
@@ -14,10 +14,10 @@
     {% if renewurl -%}
     <p>{% trans %}Please <a href="{{ renewurl }}">renew your certificate</a> in time.{% endtrans %}</p>
     {% else -%}
-    <p>{% trans 'Please renew your certificate in time.' %}</p>
+    <p>{% trans %}Please renew your certificate in time.{% endtrans %}</p>
     {% endif -%}
 
-    <p><input type="submit" name="proceed" id="proceedbutton" value="{% trans 'Proceed' %}" autofocus></p>
+    <p><input type="submit" name="proceed" id="proceedbutton" value="{% trans %}Proceed{% endtrans %}" autofocus></p>
 
 </form>
 

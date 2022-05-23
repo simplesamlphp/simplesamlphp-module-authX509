@@ -7,7 +7,11 @@
     "authors": [
         {
             "name": "Joost van Dijk",
-            "email": "Joost.vanDijk@surfnet.nl"
+            "email": "Joost.vanDijk@surf.nl"
+        },
+        {
+            "name": "Thijs Kinkhorst",
+            "email": "thijs.kinkhorst@surf.nl"
         },
         {
             "name": "Tim van Dijen",
