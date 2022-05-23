@@ -9,15 +9,16 @@
     <input type="hidden" name="{{ name }}" value="{{ value }}">
     {%- endfor %}
 
-    <p>{% trans %}Your certificate will expire in {{ daysleft }} days.{% endtrans %}</p>
+    <p>{{ 'Your certificate will expire in %daysleft% days.'|trans({'%daysleft%': daysleft}) }}</p>
 
     {% if renewurl -%}
-    <p>{% trans %}Please <a href="{{ renewurl }}">renew your certificate</a> in time.{% endtrans %}</p>
+    <p>{{ "Please <a href='%renewurl%'>renew your certificate</a> in time."|trans({'%renewurl%': renewurl})|raw }}</p>
     {% else -%}
     <p>{% trans %}Please renew your certificate in time.{% endtrans %}</p>
     {% endif -%}
 
-    <p><input type="submit" name="proceed" id="proceedbutton" value="{% trans %}Proceed{% endtrans %}" autofocus></p>
+    <p><input type="submit" name="proceed" id="proceedbutton" class="pure-button pure-button-red"
+        value="{% trans %}Proceed{% endtrans %}" autofocus></p>
 
 </form>
 

@@ -26,8 +26,8 @@ msgid "X509 certificate authentication"
 msgstr "Authenticatie via X509-certificaat"
 
 #, python-format
-msgid "Please <a href=\"%renewurl%\">renew your certificate</a> in time."
-msgstr "<a href=\"%renewurl%\">Vervang tijdig je certificaat</a>."
+msgid "Please <a href='%renewurl%'>renew your certificate</a> in time."
+msgstr "<a href='%renewurl%'>Vervang tijdig je certificaat</a>."
 
 msgid "Proceed"
 msgstr "Verder"
