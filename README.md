@@ -9,14 +9,13 @@
 Provides an authentication source for SimpleSAMLphp for users to authenticate
 by presenting their X.509 client certificate.
 
-Installation
-------------
+## Installation
 
 Once you have installed SimpleSAMLphp, installing this module is
 very simple.  Just execute the following command in the root of your
 SimpleSAMLphp installation:
 
-```
+```bash
 composer.phar require simplesamlphp/simplesamlphp-module-authx509:dev-master
 ```
 
@@ -25,7 +24,6 @@ branch from the Git repository. See the
 [releases](https://github.com/simplesamlphp/simplesamlphp-module-authx509/releases)
 available if you want to use a stable version of the module.
 
-Documentation
--------------
+## Documentation
 
 See [docs/authX509.md](https://github.com/simplesamlphp/simplesamlphp-module-authx509/blob/master/docs/authX509.md)
