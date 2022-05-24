@@ -26,9 +26,6 @@ class AuthX509Test extends TestCase
     /** @var \SimpleSAML\Configuration */
     protected Configuration $config;
 
-    /** @var \SimpleSAML\Logger */
-    protected Logger $logger;
-
     /** @var \SimpleSAML\Session */
     protected Session $session;
 
@@ -47,13 +44,6 @@ class AuthX509Test extends TestCase
             'simplesaml'
         );
 
-        $this->logger = new class () extends Logger {
-            public static function info(string $string): void
-            {
-                // do nothing
-            }
-        };
-
         $this->session = Session::getSessionFromRequest();
     }
 
@@ -69,7 +59,6 @@ class AuthX509Test extends TestCase
         );
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
-        $c->setLogger($this->logger);
 
         $this->expectException(Error\BadRequest::class);
         $this->expectExceptionMessage('Missing required StateId query parameter.');
@@ -90,7 +79,6 @@ class AuthX509Test extends TestCase
         );
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
-        $c->setLogger($this->logger);
         $c->setAuthState(new class () extends Auth\State {
             public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
             {
@@ -117,7 +105,6 @@ class AuthX509Test extends TestCase
         );
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
-        $c->setLogger($this->logger);
         $c->setAuthState(new class () extends Auth\State {
             public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
             {
@@ -145,7 +132,6 @@ class AuthX509Test extends TestCase
         );
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
-        $c->setLogger($this->logger);
         $c->setAuthState(new class () extends Auth\State {
             public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
             {
