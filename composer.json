@@ -30,7 +30,7 @@
     },
     "autoload": {
         "psr-4": {
-            "SimpleSAML\\Module\\authX509\\": "lib/"
+            "SimpleSAML\\Module\\authX509\\": "src/"
         }
     },
     "autoload-dev": {
@@ -41,11 +41,11 @@
     "require": {
         "php": ">=7.4 || ^8.0",
         "simplesamlphp/composer-module-installer": "~1.1",
-        "simplesamlphp/simplesamlphp": "^2.0.0-beta.2",
+        "simplesamlphp/simplesamlphp": "^2.0.0-beta.10",
         "simplesamlphp/simplesamlphp-module-ldap": "^1.2"
     },
     "require-dev": {
-        "simplesamlphp/simplesamlphp-test-framework": "^1.1.4"
+        "simplesamlphp/simplesamlphp-test-framework": "^1.2.1"
     },
     "extra": {
         "ssp-mixedcase-module-name": "authX509"
