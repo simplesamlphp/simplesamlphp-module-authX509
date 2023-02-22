@@ -5,13 +5,27 @@ declare(strict_types=1);
 namespace SimpleSAML\Module\authX509\Auth\Source;
 
 use Exception;
+use SimpleSAML\Assert\Assert;
 use SimpleSAML\Auth;
 use SimpleSAML\Configuration;
 use SimpleSAML\Error;
 use SimpleSAML\Logger;
-use SimpleSAML\Module\ldap\ConfigHelper;
+use SimpleSAML\Module\ldap\ConnectorFactory;
+use SimpleSAML\Module\ldap\ConnectorInterface;
 use SimpleSAML\Utils;
 use SimpleSAML\XHTML\Template;
+use Symfony\Component\Ldap\Entry;
+use Symfony\Component\Ldap\Security\LdapUserProvider;
+use Symfony\Component\Security\Core\Exception\UserNotFoundException;
+
+use function array_key_exists;
+use function array_fill_keys;
+use function array_merge;
+use function array_values;
+use function current;
+use function openssl_x509_parse;
+use function sprintf;
+use function str_replace;
 
 /**
  * This class implements x509 certificate authentication with certificate validation against an LDAP directory.
@@ -19,8 +33,23 @@ use SimpleSAML\XHTML\Template;
  * @package SimpleSAMLphp
  */
 
-class X509userCert extends \SimpleSAML\Auth\Source
+class X509userCert extends Auth\Source
 {
+    /** @var \SimpleSAML\Module\ldap\ConnectorInterface */
+    protected ConnectorInterface $connector;
+
+    /**
+     * The ldap-authsource to use
+     * @var string
+     */
+    private string $backend;
+
+    /**
+     * The ldap-authsource config to use
+     * @var \SimpleSAML\Configuration
+     */
+    private Configuration $ldapConfig;
+
     /**
      * x509 attributes to use from the certificate for searching the user in the LDAP directory.
      * @var array<string, string>
@@ -28,24 +57,11 @@ class X509userCert extends \SimpleSAML\Auth\Source
     private array $x509attributes = ['UID' => 'uid'];
 
     /**
-     * A pattern from configuration to construct a ldap dn from a username
-     * @var string|null
-     */
-    private ?string $dnpattern;
-
-
-    /**
      * LDAP attribute containing the user certificate.
      * This can be set to NULL to avoid looking up the certificate in LDAP
      * @var array|null
      */
     private ?array $ldapusercert = ['userCertificate;binary'];
-
-
-    /**
-     * @var \SimpleSAML\Module\ldap\ConfigHelper
-     */
-    private ConfigHelper $ldapcf;
 
 
     /**
@@ -58,6 +74,8 @@ class X509userCert extends \SimpleSAML\Auth\Source
      */
     public function __construct(array $info, array &$config)
     {
+        parent::__construct($info, $config);
+
         if (isset($config['authX509:x509attributes'])) {
             $this->x509attributes = $config['authX509:x509attributes'];
         }
@@ -66,16 +84,25 @@ class X509userCert extends \SimpleSAML\Auth\Source
             $this->ldapusercert = $config['authX509:ldapusercert'];
         }
 
-        if (isset($config['dnpattern'])) {
-            $this->dnpattern = $config['dnpattern'];
+        Assert::keyExists($config, 'backend');
+        $this->backend = $config['backend'];
+
+        // Get the authsources file, which should contain the backend-config
+        $authSources = Configuration::getConfig('authsources.php');
+
+        // Verify that the authsource config exists
+        if (!$authSources->hasValue($this->backend)) {
+            throw new Error\Exception(
+                sprintf('Authsource [%s] not found in authsources.php', $this->backend)
+            );
         }
 
-        parent::__construct($info, $config);
+        // Get just the specified authsource config values
+        $this->ldapConfig = $authSources->getConfigItem($this->backend);
+        $type = current($this->ldapConfig->toArray());
+        Assert::oneOf($type, ['ldap:Ldap']);
 
-        $this->ldapcf = new ConfigHelper(
-            $config,
-            'Authentication source ' . var_export($this->authId, true)
-        );
+        $this->connector = ConnectorFactory::fromAuthSource($this->backend);
     }
 
 
@@ -120,8 +147,6 @@ class X509userCert extends \SimpleSAML\Auth\Source
      */
     public function authenticate(array &$state): void
     {
-        $ldapcf = $this->ldapcf;
-
         if (
             !isset($_SERVER['SSL_CLIENT_CERT']) ||
             ($_SERVER['SSL_CLIENT_CERT'] == '')
@@ -142,25 +167,21 @@ class X509userCert extends \SimpleSAML\Auth\Source
             throw new Exception("Should never be reached");
         }
 
-        $dn = null;
-        foreach ($this->x509attributes as $x509_attr => $ldap_attr) {
+        $entry = $dn = null;
+        foreach ($this->x509attributes as $x509_attr => $attr) {
             // value is scalar
             if (array_key_exists($x509_attr, $client_cert_data['subject'])) {
                 $value = $client_cert_data['subject'][$x509_attr];
                 Logger::info('authX509: cert ' . $x509_attr . ' = ' . $value);
-
-                if (isset($this->dnpattern)) {
-                    $dn = str_replace('%username%', $value, $this->dnpattern);
-                } else {
-                    $dn = $ldapcf->searchfordn($ldap_attr, $value, true);
-                }
-                if ($dn !== null) {
+                $entry = $this->findUserByAttribute($attr, $value);
+                if ($entry !== null) {
+                    $dn = $attr;
                     break;
                 }
             }
         }
 
-        if ($dn === null) {
+        if ($entry === null) {
             Logger::error('authX509: cert has no matching user in LDAP.');
             $state['authX509.error'] = "UNKNOWNCERT";
             $this->authFailed($state);
@@ -170,7 +191,10 @@ class X509userCert extends \SimpleSAML\Auth\Source
 
         if ($this->ldapusercert === null) {
             // do not check for certificate match
-            $attributes = $ldapcf->getAttributes($dn);
+            $attributes = array_intersect_key(
+                $entry->getAttributes(),
+                array_fill_keys(array_values($this->x509attributes), null),
+            );
 
             $state['Attributes'] = $attributes;
             $this->authSuccesful($state);
@@ -178,8 +202,7 @@ class X509userCert extends \SimpleSAML\Auth\Source
             throw new Exception("Should never be reached");
         }
 
-        $ldap_certs = $ldapcf->getAttributes($dn, $this->ldapusercert);
-
+        $ldap_certs = array_map([$entry, 'getAttribute'], $this->ldapusercert);
         if (empty($ldap_certs)) {
             Logger::error('authX509: no certificate found in LDAP for dn=' . $dn);
             $state['authX509.error'] = "UNKNOWNCERT";
@@ -205,7 +228,10 @@ class X509userCert extends \SimpleSAML\Auth\Source
             }
 
             if ($ldap_cert_data === $client_cert_data) {
-                $attributes = $ldapcf->getAttributes($dn);
+                $attributes = array_intersect_key(
+                    $entry->getAttributes(),
+                    array_fill_keys(array_values($this->x509attributes), null)
+                );
                 $state['Attributes'] = $attributes;
                 $this->authSuccesful($state);
 
@@ -233,5 +259,34 @@ class X509userCert extends \SimpleSAML\Auth\Source
         Auth\Source::completeAuth($state);
 
         throw new Exception("Should never be reached");
+    }
+
+
+    /**
+     * Find user in LDAP-store
+     *
+     * @param string $attr
+     * @param string $value
+     * @return \Symfony\Component\Ldap\Entry|null
+     */
+    public function findUserByAttribute(string $attr, string $value): ?Entry
+    {
+        $searchBase = $this->ldapConfig->getString('search.base');
+
+        $searchUsername = $this->ldapConfig->getString('search.username');
+        Assert::notWhitespaceOnly($searchUsername);
+
+        $searchPassword = $this->ldapConfig->getOptionalString('search.password', null);
+        Assert::nullOrnotWhitespaceOnly($searchPassword);
+
+        $ldap = ConnectorFactory::fromAuthSource($this->backend);
+        $ldapUserProvider = new LdapUserProvider($ldap, $searchBase, $searchUsername, $searchPassword, [], $attr);
+
+        try {
+            return $ldapUserProvider->loadUserByIdentifier($value)->getEntry();
+        } catch (UserNotFoundException $e) {
+            // We haven't found the user
+            return null;
+        }
     }
 }
