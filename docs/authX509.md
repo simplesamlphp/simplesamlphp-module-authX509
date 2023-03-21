@@ -86,10 +86,12 @@ how to convert from PEM to DER:
 
 Here is some LDIF to upload the certificate in the directory:
 
-> dn: uid=jdoe,dc=example,dc=net
-> changetype: modify
-> add: userCertificate;binary
-> userCertificate;binary:< file:///path/to/cert.der
+```ldif
+dn: uid=jdoe,dc=example,dc=net
+changetype: modify
+add: userCertificate;binary
+userCertificate;binary:< file:///path/to/cert.der
+```
 
 ## Supporting both certificate and login authentication
 
