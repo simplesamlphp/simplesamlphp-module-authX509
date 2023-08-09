@@ -9,7 +9,7 @@ on:
     branches: [ master, simplesamlphp-* ]
     paths:
       - '**.md'
-  workflow_dispatch
+  workflow_dispatch:
 
 jobs:
   quality:
