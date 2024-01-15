@@ -19,7 +19,7 @@ use SimpleSAML\XHTML\Template;
  * @package SimpleSAMLphp
  */
 
-class X509userCert extends \SimpleSAML\Auth\Source
+class X509userCert extends Auth\Source
 {
     /**
      * x509 attributes to use from the certificate for searching the user in the LDAP directory.

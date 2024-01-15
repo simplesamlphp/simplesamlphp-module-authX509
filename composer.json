@@ -40,7 +40,7 @@
         }
     },
     "require": {
-        "php": "^8.0",
+        "php": "^8.1",
         "ext-openssl" : "*",
 
         "simplesamlphp/assert": "^1.0",
