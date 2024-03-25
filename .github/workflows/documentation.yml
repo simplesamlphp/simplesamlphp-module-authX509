@@ -2,7 +2,7 @@
 
 name: Documentation
 
-on:
+on:  # yamllint disable-line rule:truthy
   push:
     branches: [master, simplesamlphp-*]
     paths:
@@ -28,7 +28,7 @@ jobs:
           ignore_path: .markdownlintignore
 
       - name: Perform spell check
-        uses: codespell-project/actions-codespell@master
+        uses: codespell-project/actions-codespell@v2
         with:
           path: '**/*.md'
           check_filenames: true
@@ -42,7 +42,7 @@ jobs:
     steps:
       - name: Run docs build
         if: github.event_name != 'pull_request'
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           # Token has to be generated on a user account that controls the docs-repository.
           # The _only_ scope to select is "Access public repositories", nothing more.
