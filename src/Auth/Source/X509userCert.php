@@ -202,7 +202,11 @@ class X509userCert extends Auth\Source
             throw new Exception("Should never be reached");
         }
 
-        $ldap_certs = array_map([$entry, 'getAttribute'], $this->ldapusercert);
+        $ldap_certs = [];
+        foreach ($this->ldapusercert as $attr) {
+            $ldap_certs[$attr] = $entry->getAttribute($attr);
+        }
+
         if (empty($ldap_certs)) {
             Logger::error('authX509: no certificate found in LDAP for dn=' . $dn);
             $state['authX509.error'] = "UNKNOWNCERT";
@@ -214,7 +218,7 @@ class X509userCert extends Auth\Source
 
         $merged_ldapcerts = [];
         foreach ($this->ldapusercert as $attr) {
-            $merged_ldapcerts = array_merge($merged_ldapcerts, $ldap_certs[0][$attr]);
+            $merged_ldapcerts = array_merge($merged_ldapcerts, $ldap_certs[$attr]);
         }
         $ldap_certs = $merged_ldapcerts;
 
