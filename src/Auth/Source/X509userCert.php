@@ -18,14 +18,13 @@ use Symfony\Component\Ldap\Entry;
 use Symfony\Component\Ldap\Security\LdapUserProvider;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
-use function array_key_exists;
 use function array_fill_keys;
+use function array_key_exists;
 use function array_merge;
 use function array_values;
 use function current;
 use function openssl_x509_parse;
 use function sprintf;
-use function str_replace;
 
 /**
  * This class implements x509 certificate authentication with certificate validation against an LDAP directory.

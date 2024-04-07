@@ -1,5 +1,8 @@
 {
   "symbol-whitelist": [
-    "SimpleSAML\\Module\\ldap\\ConfigHelper"
+    "SimpleSAML\\Module\\ldap\\ConfigHelper",
+    "SimpleSAML\\Module\\ldap\\ConnectorFactory",
+    "SimpleSAML\\Module\\ldap\\ConnectorInterface",
+    "Symfony\\Component\\Security\\Core\\Exception\\UserNotFoundException"
   ]
 }
