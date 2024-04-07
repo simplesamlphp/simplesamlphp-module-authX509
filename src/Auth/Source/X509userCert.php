@@ -15,6 +15,7 @@ use SimpleSAML\Module\ldap\ConnectorInterface;
 use SimpleSAML\Utils;
 use SimpleSAML\XHTML\Template;
 use Symfony\Component\Ldap\Entry;
+use Symfony\Component\Ldap\Ldap;
 use Symfony\Component\Ldap\Security\LdapUserProvider;
 use Symfony\Component\Security\Core\Exception\UserNotFoundException;
 
@@ -279,9 +280,10 @@ class X509userCert extends Auth\Source
         Assert::nullOrnotWhitespaceOnly($searchPassword);
 
         $ldap = ConnectorFactory::fromAuthSource($this->backend);
+        $connection = new Ldap($ldap->getAdapter());
 
         foreach ($searchBase as $base) {
-            $ldapUserProvider = new LdapUserProvider($ldap, $base, $searchUsername, $searchPassword, [], $attr);
+            $ldapUserProvider = new LdapUserProvider($connection, $base, $searchUsername, $searchPassword, [], $attr);
             try {
                 return $ldapUserProvider->loadUserByIdentifier($value)->getEntry();
             } catch (UserNotFoundException $e) {
