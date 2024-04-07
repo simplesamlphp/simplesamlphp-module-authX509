@@ -271,7 +271,7 @@ class X509userCert extends Auth\Source
      */
     public function findUserByAttribute(string $attr, string $value): ?Entry
     {
-        $searchBase = $this->ldapConfig->getString('search.base');
+        $searchBase = $this->ldapConfig->getArray('search.base');
 
         $searchUsername = $this->ldapConfig->getString('search.username');
         Assert::notWhitespaceOnly($searchUsername);
@@ -280,13 +280,17 @@ class X509userCert extends Auth\Source
         Assert::nullOrnotWhitespaceOnly($searchPassword);
 
         $ldap = ConnectorFactory::fromAuthSource($this->backend);
-        $ldapUserProvider = new LdapUserProvider($ldap, $searchBase, $searchUsername, $searchPassword, [], $attr);
 
-        try {
-            return $ldapUserProvider->loadUserByIdentifier($value)->getEntry();
-        } catch (UserNotFoundException $e) {
-            // We haven't found the user
-            return null;
+        foreach ($searchBase as $base) {
+            $ldapUserProvider = new LdapUserProvider($ldap, $base, $searchUsername, $searchPassword, [], $attr);
+            try {
+                return $ldapUserProvider->loadUserByIdentifier($value)->getEntry();
+            } catch (UserNotFoundException $e) {
+                continue;
+            }
         }
+
+        // We haven't found the user
+        return null;
     }
 }
