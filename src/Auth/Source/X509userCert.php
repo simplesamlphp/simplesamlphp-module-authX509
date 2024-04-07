@@ -214,7 +214,7 @@ class X509userCert extends Auth\Source
 
         $merged_ldapcerts = [];
         foreach ($this->ldapusercert as $attr) {
-            $merged_ldapcerts = array_merge($merged_ldapcerts, $ldap_certs[$attr]);
+            $merged_ldapcerts = array_merge($merged_ldapcerts, $ldap_certs[0][$attr]);
         }
         $ldap_certs = $merged_ldapcerts;
 
