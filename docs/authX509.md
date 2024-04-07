@@ -51,14 +51,18 @@ example authsources.php entry:
 ```php
     'x509' => [
         'authX509:X509userCert',
-        'hostname' => 'ldaps://ldap.example.net',
-        'enable_tls' => false,
+        'backend' => 'ldap',
+        'authX509:x509attributes' => ['UID' => 'uid'],
+        'authX509:ldapusercert' => ['userCertificate;binary'],
+    ],
+
+    'ldap' => [
+        'connection_string' => 'ldaps://ldap.example.net',
+        'encryption' => 'ssl',
         'attributes' => ['cn', 'uid', 'mail', 'ou', 'sn'],
         'search.enable' => true,
         'search.attributes' => ['uid', 'mail'],
-        'search.base' => 'dc=example,dc=net',
-        'authX509:x509attributes' => ['UID' => 'uid'],
-        'authX509:ldapusercert' => ['userCertificate;binary'],
+        'search.base' => ['dc=example,dc=net'],
     ],
 ```
 
