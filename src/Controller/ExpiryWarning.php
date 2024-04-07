@@ -89,7 +89,7 @@ class ExpiryWarning
         $t->data['data'] = ['StateId' => $id];
         $t->data['daysleft'] = $state['daysleft'];
         $t->data['renewurl'] = $state['renewurl'];
-        $t->data['errorcodes'] = Error\ErrorCodes::getAllErrorCodeMessages();
+        $t->data['errorcodes'] = (new Error\ErrorCodes())->getAllMessages();
         return $t;
     }
 }
