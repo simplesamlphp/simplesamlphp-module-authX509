@@ -117,7 +117,7 @@ class X509userCert extends Auth\Source
     {
         $config = Configuration::getInstance();
         $errorcode = $state['authX509.error'];
-        $errorcodes = Error\ErrorCodes::getAllErrorCodeMessages();
+        $errorcodes = (new Error\ErrorCodes())->getAllMessages();
 
         $t = new Template($config, 'authX509:X509error.twig');
         $httpUtils = new Utils\HTTP();
