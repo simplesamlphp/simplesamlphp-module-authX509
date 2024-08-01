@@ -93,7 +93,7 @@ class X509userCert extends Auth\Source
         // Verify that the authsource config exists
         if (!$authSources->hasValue($this->backend)) {
             throw new Error\Exception(
-                sprintf('Authsource [%s] not found in authsources.php', $this->backend)
+                sprintf('Authsource [%s] not found in authsources.php', $this->backend),
             );
         }
 
@@ -234,7 +234,7 @@ class X509userCert extends Auth\Source
             if ($ldap_cert_data === $client_cert_data) {
                 $attributes = array_intersect_key(
                     $entry->getAttributes(),
-                    array_fill_keys(array_values($this->ldapConfig->getArray('attributes')), null)
+                    array_fill_keys(array_values($this->ldapConfig->getArray('attributes')), null),
                 );
                 $state['Attributes'] = $attributes;
                 $this->authSuccesful($state);
