@@ -277,8 +277,8 @@ class X509userCert extends Auth\Source
     {
         $searchBase = $this->ldapConfig->getArray('search.base');
 
-        $searchUsername = $this->ldapConfig->getString('search.username');
-        Assert::notWhitespaceOnly($searchUsername);
+        $searchUsername = $this->ldapConfig->getOptionalString('search.username', null);
+        Assert::nullOrnotWhitespaceOnly($searchUsername);
 
         $searchPassword = $this->ldapConfig->getOptionalString('search.password', null);
         Assert::nullOrnotWhitespaceOnly($searchPassword);
