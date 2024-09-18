@@ -191,10 +191,14 @@ class X509userCert extends Auth\Source
 
         if ($this->ldapusercert === null) {
             // do not check for certificate match
-            $attributes = array_intersect_key(
-                $entry->getAttributes(),
-                array_fill_keys(array_values($this->ldapConfig->getArray('attributes')), null),
-            );
+            if (is_null($this->ldapConfig->getOptionalArray('attributes',null))) {
+                $attributes = $entry->getAttributes();
+            } else {
+                $attributes = array_intersect_key(
+                    $entry->getAttributes(),
+                    array_fill_keys(array_values($this->ldapConfig->getArray('attributes')), null),
+                );
+            }
 
             $state['Attributes'] = $attributes;
             $this->authSuccesful($state);
@@ -232,10 +236,14 @@ class X509userCert extends Auth\Source
             }
 
             if ($ldap_cert_data === $client_cert_data) {
-                $attributes = array_intersect_key(
-                    $entry->getAttributes(),
-                    array_fill_keys(array_values($this->ldapConfig->getArray('attributes')), null),
-                );
+		        if (is_null($this->ldapConfig->getOptionalArray('attributes',null))) {
+                    $attributes = $entry->getAttributes();
+                } else {
+                    $attributes = array_intersect_key(
+                        $entry->getAttributes(),
+                        array_fill_keys(array_values($this->ldapConfig->getArray('attributes')), null),
+                    );
+                }
                 $state['Attributes'] = $attributes;
                 $this->authSuccesful($state);
 
