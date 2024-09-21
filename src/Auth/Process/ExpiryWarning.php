@@ -45,7 +45,7 @@ class ExpiryWarning extends Auth\ProcessingFilter
         if (array_key_exists('warndaysbefore', $config)) {
             Assert::integerish(
                 $config['warndaysbefore'],
-                'Invalid value for \'warndaysbefore\'-option to authX509::ExpiryWarning filter.'
+                'Invalid value for \'warndaysbefore\'-option to authX509::ExpiryWarning filter.',
             );
             $this->warndaysbefore = (int)$config['warndaysbefore'];
         }
@@ -54,7 +54,7 @@ class ExpiryWarning extends Auth\ProcessingFilter
             $this->renewurl = $config['renewurl'];
             Assert::string(
                 $this->renewurl,
-                'Invalid value for \'renewurl\'-option to authX509::ExpiryWarning filter.'
+                'Invalid value for \'renewurl\'-option to authX509::ExpiryWarning filter.',
             );
         }
     }

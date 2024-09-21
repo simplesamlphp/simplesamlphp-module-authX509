@@ -94,7 +94,7 @@ class X509userCert extends Auth\Source
         // Verify that the authsource config exists
         if (!$authSources->hasValue($this->backend)) {
             throw new Error\Exception(
-                sprintf('Authsource [%s] not found in authsources.php', $this->backend)
+                sprintf('Authsource [%s] not found in authsources.php', $this->backend),
             );
         }
 

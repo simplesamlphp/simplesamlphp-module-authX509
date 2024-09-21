@@ -39,7 +39,7 @@ class AuthX509Test extends TestCase
                 'module.enable' => ['authx509' => true],
             ],
             '[ARRAY]',
-            'simplesaml'
+            'simplesaml',
         );
 
         $this->session = Session::getSessionFromRequest();
@@ -53,7 +53,7 @@ class AuthX509Test extends TestCase
     {
         $request = Request::create(
             '/expiryWarning',
-            'GET'
+            'GET',
         );
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
@@ -73,7 +73,7 @@ class AuthX509Test extends TestCase
         $request = Request::create(
             '/expiryWarning',
             'GET',
-            ['StateId' => 'SomeStateId']
+            ['StateId' => 'SomeStateId'],
         );
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
@@ -99,7 +99,7 @@ class AuthX509Test extends TestCase
         $request = Request::create(
             '/expiryWarning',
             'GET',
-            ['StateId' => 'SomeStateId', 'proceed' => 'pleaseProceed']
+            ['StateId' => 'SomeStateId', 'proceed' => 'pleaseProceed'],
         );
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
@@ -126,7 +126,7 @@ class AuthX509Test extends TestCase
         $request = Request::create(
             '/expiryWarning',
             'GET',
-            ['StateId' => 'SomeStateId', 'proceed']
+            ['StateId' => 'SomeStateId', 'proceed'],
         );
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
