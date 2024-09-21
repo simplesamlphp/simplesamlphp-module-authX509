@@ -24,6 +24,7 @@ use function array_key_exists;
 use function array_merge;
 use function array_values;
 use function current;
+use function is_null;
 use function openssl_x509_parse;
 use function sprintf;
 
@@ -191,7 +192,7 @@ class X509userCert extends Auth\Source
 
         if ($this->ldapusercert === null) {
             // do not check for certificate match
-            if (is_null($this->ldapConfig->getOptionalArray('attributes',null))) {
+            if (is_null($this->ldapConfig->getOptionalArray('attributes', null))) {
                 $attributes = $entry->getAttributes();
             } else {
                 $attributes = array_intersect_key(
@@ -236,7 +237,7 @@ class X509userCert extends Auth\Source
             }
 
             if ($ldap_cert_data === $client_cert_data) {
-		        if (is_null($this->ldapConfig->getOptionalArray('attributes',null))) {
+                if (is_null($this->ldapConfig->getOptionalArray('attributes', null))) {
                     $attributes = $entry->getAttributes();
                 } else {
                     $attributes = array_intersect_key(
