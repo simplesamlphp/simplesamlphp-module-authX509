@@ -49,9 +49,9 @@
         "simplesamlphp/composer-module-installer": "^1.3.2",
         "simplesamlphp/simplesamlphp": "^2.2",
         "simplesamlphp/simplesamlphp-module-ldap": "^2.2",
-        "symfony/http-foundation": "^6.4",
-        "symfony/ldap": "^6.4",
-        "symfony/security-core": "^6.4"
+        "symfony/http-foundation": "^6.4 <7",
+        "symfony/ldap": "^6.4 <7",
+        "symfony/security-core": "^6.4 <7"
     },
     "require-dev": {
         "simplesamlphp/simplesamlphp-test-framework": "^1.6.0"
