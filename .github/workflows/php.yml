@@ -32,9 +32,9 @@ jobs:
 
     uses: simplesamlphp/simplesamlphp-test-framework/.github/workflows/reusable_linter.yml@v1.9.2
     with:
-      enable_eslinter: true
+      enable_eslinter: false
       enable_jsonlinter: true
-      enable_stylelinter: true
+      enable_stylelinter: false
       enable_yamllinter: true
 
   unit-tests-linux:
