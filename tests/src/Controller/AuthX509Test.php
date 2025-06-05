@@ -19,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @package SimpleSAML\Test
  */
-class AuthX509Test extends TestCase
+final class AuthX509Test extends TestCase
 {
     /** @var \SimpleSAML\Configuration */
     protected Configuration $config;
