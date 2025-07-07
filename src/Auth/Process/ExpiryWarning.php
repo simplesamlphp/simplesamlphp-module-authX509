@@ -35,7 +35,7 @@ class ExpiryWarning extends Auth\ProcessingFilter
     /**
      * Initialize this filter.
      *
-     * @param array $config  Configuration information about this filter.
+     * @param array<mixed> $config  Configuration information about this filter.
      * @param mixed $reserved  For future use.
      */
     public function __construct(array $config, $reserved)
@@ -65,7 +65,7 @@ class ExpiryWarning extends Auth\ProcessingFilter
      * This function saves the state, and if necessary redirects the user to the page where the user
      * is informed about the expiry date of his/her certificate.
      *
-     * @param array $state  The state of the response.
+     * @param array<mixed> $state  The state of the response.
      */
     public function process(array &$state): void
     {

@@ -60,7 +60,7 @@ class X509userCert extends Auth\Source
     /**
      * LDAP attribute containing the user certificate.
      * This can be set to NULL to avoid looking up the certificate in LDAP
-     * @var array|null
+     * @var string[]|null
      */
     private ?array $ldapusercert = ['userCertificate;binary'];
 
@@ -70,8 +70,8 @@ class X509userCert extends Auth\Source
      *
      * All subclasses who implement their own constructor must call this constructor before using $config for anything.
      *
-     * @param array $info Information about this authentication source.
-     * @param array &$config Configuration for this authentication source.
+     * @param array<mixed> $info Information about this authentication source.
+     * @param array<mixed> &$config Configuration for this authentication source.
      */
     public function __construct(array $info, array &$config)
     {
@@ -112,7 +112,7 @@ class X509userCert extends Auth\Source
      *
      * This function can be overloaded by a child authentication class that wish to perform some operations on failure.
      *
-     * @param array &$state Information about the current authentication.
+     * @param array<mixed> &$state Information about the current authentication.
      */
     public function authFailed(&$state): void
     {
@@ -144,7 +144,7 @@ class X509userCert extends Auth\Source
      * This function try to validate the certificate. On success, the user is logged in without going through the login
      * page. On failure, The authX509:X509error.php template is loaded.
      *
-     * @param array &$state Information about the current authentication.
+     * @param array<mixed> &$state Information about the current authentication.
      */
     public function authenticate(array &$state): void
     {
@@ -265,7 +265,7 @@ class X509userCert extends Auth\Source
      *
      * This function can be overloaded by a child authentication class that wish to perform some operations after login.
      *
-     * @param array &$state Information about the current authentication.
+     * @param array<mixed> &$state Information about the current authentication.
      */
     public function authSuccesful(array &$state): void
     {
@@ -287,10 +287,10 @@ class X509userCert extends Auth\Source
         $searchBase = $this->ldapConfig->getArray('search.base');
 
         $searchUsername = $this->ldapConfig->getOptionalString('search.username', null);
-        Assert::nullOrnotWhitespaceOnly($searchUsername);
+        Assert::nullOrNotWhitespaceOnly($searchUsername);
 
         $searchPassword = $this->ldapConfig->getOptionalString('search.password', null);
-        Assert::nullOrnotWhitespaceOnly($searchPassword);
+        Assert::nullOrNotWhitespaceOnly($searchPassword);
 
         $ldap = ConnectorFactory::fromAuthSource($this->backend);
         $connection = new Ldap($ldap->getAdapter());

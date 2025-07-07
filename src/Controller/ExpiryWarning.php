@@ -70,8 +70,8 @@ class ExpiryWarning
     {
         Logger::info('AuthX509 - Showing expiry warning to user');
 
-        $id = $request->query->get('StateId', null);
-        if ($id === null) {
+        $id = $request->query->getString('StateId');
+        if (empty($id)) {
             throw new Error\BadRequest('Missing required StateId query parameter.');
         }
 
