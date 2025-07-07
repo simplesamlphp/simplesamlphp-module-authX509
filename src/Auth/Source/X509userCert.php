@@ -293,7 +293,7 @@ class X509userCert extends Auth\Source
         Assert::nullOrNotWhitespaceOnly($searchPassword);
 
         $searchFilter = $this->ldapConfig->getOptionalString('search.filter', '({uid_key}={user_identifier})');
-        Assert::nullOrnotWhitespaceOnly($searchFilter);
+        Assert::nullOrNotWhitespaceOnly($searchFilter);
 
         $ldap = ConnectorFactory::fromAuthSource($this->backend);
         $connection = new Ldap($ldap->getAdapter());
