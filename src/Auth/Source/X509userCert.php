@@ -292,11 +292,14 @@ class X509userCert extends Auth\Source
         $searchPassword = $this->ldapConfig->getOptionalString('search.password', null);
         Assert::nullOrNotWhitespaceOnly($searchPassword);
 
+        $searchFilter = $this->ldapConfig->getOptionalString('search.filter', '({uid_key}={user_identifier})');
+        Assert::nullOrNotWhitespaceOnly($searchFilter);
+
         $ldap = ConnectorFactory::fromAuthSource($this->backend);
         $connection = new Ldap($ldap->getAdapter());
 
         foreach ($searchBase as $base) {
-            $ldapUserProvider = new LdapUserProvider($connection, $base, $searchUsername, $searchPassword, [], $attr);
+            $ldapUserProvider = new LdapUserProvider($connection, $base, $searchUsername, $searchPassword, [], $attr, $searchFilter);
             try {
                 return $ldapUserProvider->loadUserByIdentifier($value)->getEntry();
             } catch (UserNotFoundException $e) {
