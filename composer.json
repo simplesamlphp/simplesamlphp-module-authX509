@@ -42,19 +42,19 @@
         }
     },
     "require": {
-        "php": "^8.2",
+        "php": "^8.3",
         "ext-openssl" : "*",
 
-        "simplesamlphp/assert": "~1.0",
-        "simplesamlphp/composer-module-installer": "~1.6",
+        "simplesamlphp/assert": "~2.0",
+        "simplesamlphp/composer-module-installer": "~1.7",
         "simplesamlphp/simplesamlphp": "~2.5@dev",
-        "simplesamlphp/simplesamlphp-module-ldap": "~2.2",
+        "simplesamlphp/simplesamlphp-module-ldap": "~2.5",
         "symfony/http-foundation": "~7.4",
         "symfony/ldap": "~7.4",
         "symfony/security-core": "~7.4"
     },
     "require-dev": {
-        "simplesamlphp/simplesamlphp-test-framework": "~1.10"
+        "simplesamlphp/simplesamlphp-test-framework": "~1.11"
     },
     "extra": {
         "ssp-mixedcase-module-name": "authX509"
