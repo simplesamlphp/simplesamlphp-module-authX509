@@ -27,6 +27,7 @@ final class AuthX509Test extends TestCase
     /** @var \SimpleSAML\Session */
     protected Session $session;
 
+
     /**
      * Set up for each test.
      */

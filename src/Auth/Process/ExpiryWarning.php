@@ -32,6 +32,7 @@ class ExpiryWarning extends Auth\ProcessingFilter
     /** @var string|null */
     private ?string $renewurl = null;
 
+
     /**
      * Initialize this filter.
      *
@@ -58,6 +59,7 @@ class ExpiryWarning extends Auth\ProcessingFilter
             );
         }
     }
+
 
     /**
      * Process an authentication response.
