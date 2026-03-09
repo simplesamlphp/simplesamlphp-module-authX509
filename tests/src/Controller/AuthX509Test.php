@@ -79,8 +79,7 @@ final class AuthX509Test extends TestCase
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
         $c->setAuthState(new class () extends Auth\State {
-            /** @return array<mixed>|null */
-            public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
+            public static function loadState(string $id, string $stage, bool $allowMissing = false): null
             {
                 return null;
             }
@@ -106,8 +105,8 @@ final class AuthX509Test extends TestCase
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
         $c->setAuthState(new class () extends Auth\State {
-            /** @return array<mixed>|null */
-            public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
+            /** @return array<mixed> */
+            public static function loadState(string $id, string $stage, bool $allowMissing = false): array
             {
                 return [];
             }
@@ -134,8 +133,8 @@ final class AuthX509Test extends TestCase
 
         $c = new Controller\ExpiryWarning($this->config, $this->session);
         $c->setAuthState(new class () extends Auth\State {
-            /** @return array<mixed>|null */
-            public static function loadState(string $id, string $stage, bool $allowMissing = false): ?array
+            /** @return array<mixed> */
+            public static function loadState(string $id, string $stage, bool $allowMissing = false): array
             {
                 return ['daysleft' => 10, 'renewurl' => 'https://example.org/renew'];
             }
