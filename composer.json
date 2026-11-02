@@ -54,7 +54,7 @@
         "symfony/security-core": "~7.4"
     },
     "require-dev": {
-        "simplesamlphp/simplesamlphp-test-framework": "~1.11"
+        "simplesamlphp/simplesamlphp-test-framework": "~2.0"
     },
     "extra": {
         "ssp-mixedcase-module-name": "authX509"
