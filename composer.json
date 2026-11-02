@@ -51,7 +51,7 @@
         "simplesamlphp/simplesamlphp-module-ldap": "~2.5",
         "symfony/http-foundation": "~7.4",
         "symfony/ldap": "~7.4",
-        "symfony/security-core": "~7.4"
+        "symfony/security-core": "~8.1"
     },
     "require-dev": {
         "simplesamlphp/simplesamlphp-test-framework": "~2.0"
